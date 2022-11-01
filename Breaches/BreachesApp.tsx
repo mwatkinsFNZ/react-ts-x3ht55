@@ -23,7 +23,7 @@ export const BreachesApp: FC<{ changeApp: ChangeAppType; path: Path }> = ({
       });
     }
 
-    setState(new Date()); // used to trigger re-render
+    setState(new Date()); // used to trigger a re-render for the local-storage updates to take effect
   }, [history]);
 
   return (

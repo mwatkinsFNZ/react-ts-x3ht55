@@ -20,7 +20,7 @@ export const PortfoliosApp: FC<{ changeApp: ChangeAppType; path: Path }> = ({
       updateLocalStorage({ key: 'portfolio-review-buy-sell', value: 'false' });
     }
 
-    setState(new Date()); // used to trigger re-render
+    setState(new Date()); // used to trigger a re-render for the local-storage updates to take effect
   }, [history]);
 
   return (
