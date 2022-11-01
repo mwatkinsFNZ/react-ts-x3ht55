@@ -8,11 +8,11 @@ export type LocalStorageKeys =
   | BreachesKeys
   | PortfoliosKeys;
 
-export type BreachesKeys = 'breaches-reports-modal-open';
+export type BreachesKeys = 'breaches-reports-modal-open' | 'breaches-url';
 export type PortfoliosKeys = 'portfolio-review-buy-sell';
 
 export type LocalStorageKeysRequiringInput = BreachesKeysRequiringValues;
-export type BreachesKeysRequiringValues = 'breaches_reports-breaches-id';
+export type BreachesKeysRequiringValues = 'breaches-reports-breaches-id';
 
 export type NewLocalStorage = {
   path: Path;

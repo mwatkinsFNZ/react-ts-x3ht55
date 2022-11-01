@@ -14,6 +14,10 @@ export const PortfoliosApp: FC<{
   localStorage: NewLocalStorage;
 }> = ({ changeApp, localStorage }) => {
   const history = useHistory();
+  const {
+    location: { pathname },
+  } = history;
+  const [, basePage] = pathname.split('/');
   const [state, setState] = useState(new Date());
 
   useEffect(() => {
@@ -28,17 +32,17 @@ export const PortfoliosApp: FC<{
 
   return (
     <div>
-      <h1>Portfolio Review</h1>
+      <h1>{basePage}</h1>
       <PrintLocalStorage />
-      <button onClick={() => changeApp('/breaches', 'overview')}>
+      <button onClick={() => changeApp('/breaches/overview', 'overview')}>
         Breach Overview
       </button>
       <button
         onClick={() =>
           changeApp(
-            '/breaches',
+            '/breaches/reportsPage',
             'breachSummary',
-            new Map([['breaches_reports-breaches-id', '123']])
+            new Map([['breaches-reports-breaches-id', '123']])
           )
         }
       >

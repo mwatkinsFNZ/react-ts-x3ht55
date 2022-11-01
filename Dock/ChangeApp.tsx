@@ -22,6 +22,10 @@ export function useChangeApp(): {
     path: Path,
     params: Map<LocalStorageKeysRequiringInput, string>
   ) => {
+    if (false) {
+      // todo check if the first url part is in the "apps.shortname"
+    }
+
     setState((s) => ({
       ...s,
       localStorage: {
