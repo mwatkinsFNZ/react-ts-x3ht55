@@ -41,7 +41,6 @@ export const BreachesApp: FC<{
         <Route path={'/overview'}>
           <OverviewApp changeApp={changeApp} localStorage={localStorage} />
         </Route>
-        <Route path={'/'}>hi</Route>
       </BrowserRouter>
       <button onClick={() => changeApp('/portfolios/123', 'ReviewOnly')}>
         Review Only
