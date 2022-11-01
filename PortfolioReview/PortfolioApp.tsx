@@ -5,21 +5,21 @@ import {
   removeLocalStorage,
   updateLocalStorage,
 } from '../CommonComponentCode/LocalStorageUtils';
+import { NewLocalStorage } from '../CommonComponentCode/Types';
 import { ChangeAppType } from '../Dock/ChangeApp';
-import { Path } from '../Dock/Types';
 import { PrintLocalStorage } from '../PrintLocalStorage';
 
-export const PortfoliosApp: FC<{ changeApp: ChangeAppType; path: Path }> = ({
-  changeApp,
-  path,
-}) => {
+export const PortfoliosApp: FC<{
+  changeApp: ChangeAppType;
+  localStorage: NewLocalStorage;
+}> = ({ changeApp, localStorage }) => {
   const history = useHistory();
   const [state, setState] = useState(new Date());
 
   useEffect(() => {
-    if (path === 'buySellMode') {
+    if (localStorage.path === 'buySellMode') {
       updateLocalStorage({ key: 'portfolio-review-buy-sell', value: 'true' });
-    } else if (path === 'ReviewOnly') {
+    } else if (localStorage.path === 'ReviewOnly') {
       removeLocalStorage('portfolio-review-buy-sell');
     }
 
@@ -33,7 +33,15 @@ export const PortfoliosApp: FC<{ changeApp: ChangeAppType; path: Path }> = ({
       <button onClick={() => changeApp('/breaches', 'overview')}>
         Breach Overview
       </button>
-      <button onClick={() => changeApp('/breaches', 'breachSummary')}>
+      <button
+        onClick={() =>
+          changeApp(
+            '/breaches',
+            'breachSummary',
+            new Map([['breaches_reports-breaches-id', '123']])
+          )
+        }
+      >
         Breach Summary
       </button>
     </div>

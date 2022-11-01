@@ -5,25 +5,29 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
-  useEffect,
   useState,
 } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { NewLocalStorage } from '../CommonComponentCode/Types';
 import Routes from '../Dock/Routes';
-import { Path } from '../Dock/Types';
 
-export type IAppStateContext = {
-  state: Path;
-  setState: Dispatch<SetStateAction<string>>;
+export type AppState = {
+  /// additional dock state properties
+  localStorage: NewLocalStorage;
 };
 
-export const AppStateContext = createContext<IAppStateContext | undefined>(
+export type AppStateContext = {
+  state: AppState;
+  setState: Dispatch<SetStateAction<AppState>>;
+};
+
+export const AppStateContext = createContext<AppStateContext | undefined>(
   undefined
 );
 
 export const useAppStateContext = (
-  context: Context<IAppStateContext | undefined>
-): IAppStateContext => {
+  context: Context<AppStateContext | undefined>
+): AppStateContext => {
   const contextValue = useContext(context);
   if (contextValue === undefined) {
     throw Error('Context has not been Provided!');
@@ -33,7 +37,7 @@ export const useAppStateContext = (
 };
 
 export default function DockApp() {
-  const [state, setState] = useState<Path | undefined>(undefined);
+  const [state, setState] = useState<AppState>(undefined);
 
   return (
     <div>

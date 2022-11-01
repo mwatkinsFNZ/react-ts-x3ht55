@@ -8,7 +8,10 @@ import { PortfoliosApp } from '../PortfolioReview/PortfolioApp';
 export default function Routes() {
   const { change } = useChangeApp();
   const { state, setState } = useAppStateContext(AppStateContext);
-
+  const defaultLocalStorage = {
+    path: undefined,
+    params: undefined,
+  };
   return (
     <div>
       <span>Dock Navigation: </span>
@@ -23,10 +26,16 @@ export default function Routes() {
         </NavLink>
       </div>
       <Route path={'/Breaches'}>
-        <BreachesApp changeApp={change} path={state} />
+        <BreachesApp
+          changeApp={change}
+          localStorage={state?.localStorage ?? defaultLocalStorage}
+        />
       </Route>
       <Route path={'/Portfolios'}>
-        <PortfoliosApp changeApp={change} path={state} />
+        <PortfoliosApp
+          changeApp={change}
+          localStorage={state?.localStorage ?? defaultLocalStorage}
+        />
       </Route>
       <Route path={'/'}>
         <Redirect to={'/Portfolios'} />
