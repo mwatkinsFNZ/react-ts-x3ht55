@@ -8,6 +8,16 @@ export const OverviewApp: FC<{
   changeApp: ChangeAppType;
   localStorage: NewLocalStorage;
 }> = ({ changeApp, localStorage }) => {
-  console.log('i am in overview page');
-  return <PrintLocalStorage />;
+  return (
+    <div>
+      <PrintLocalStorage />
+      <div>
+        <button
+          onClick={() => changeApp('/breaches/reportsPage', 'reportsPage')}
+        >
+          Reports Page
+        </button>
+      </div>
+    </div>
+  );
 };

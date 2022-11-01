@@ -34,20 +34,24 @@ export const PortfoliosApp: FC<{
     <div>
       <h1>{basePage}</h1>
       <PrintLocalStorage />
-      <button onClick={() => changeApp('/breaches/overview', 'overview')}>
-        Breach Overview
-      </button>
-      <button
-        onClick={() =>
-          changeApp(
-            '/breaches/reportsPage',
-            'breachSummary',
-            new Map([['breaches-reports-breaches-id', '123']])
-          )
-        }
-      >
-        Breach Summary
-      </button>
+      <div>
+        <button onClick={() => changeApp('/breaches/overview', 'overview')}>
+          Breach Overview
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={() =>
+            changeApp(
+              '/breaches/reportsPage',
+              'breachSummary',
+              new Map([['breaches-reports-breaches-id', '123']])
+            )
+          }
+        >
+          Breach Summary
+        </button>
+      </div>
     </div>
   );
 };

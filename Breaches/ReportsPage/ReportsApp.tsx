@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { updateLocalStorage } from '../../CommonComponentCode/LocalStorageUtils';
+import {
+  removeLocalStorage,
+  updateLocalStorage,
+} from '../../CommonComponentCode/LocalStorageUtils';
 import { NewLocalStorage } from '../../CommonComponentCode/Types';
 import { ChangeAppType } from '../../Dock/ChangeApp';
 import { PrintLocalStorage } from '../../PrintLocalStorage';
@@ -20,11 +23,13 @@ export const ReportsApp: FC<{
         key: 'breaches-reports-breaches-id',
         value: localStorage.params.get('breaches-reports-breaches-id'),
       });
+    } else if (localStorage.path === 'reportsPage') {
+      removeLocalStorage('breaches-reports-modal-open');
+      removeLocalStorage('breaches-reports-breaches-id');
     }
 
     setState(new Date()); // used to trigger a re-render for the local-storage updates to take effect
   }, [history]);
 
-  console.log('i am in reports page');
   return <PrintLocalStorage />;
 };
