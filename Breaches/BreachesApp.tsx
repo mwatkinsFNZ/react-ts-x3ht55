@@ -1,18 +1,17 @@
 import * as React from 'react';
-import { FC, useEffect, useState } from 'react';
-import { Route, useHistory, useRouteMatch } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { OverviewApp } from '../Breaches/Overview/OverviewApp';
 import { ReportsApp } from '../Breaches/ReportsPage/ReportsApp';
 import { updateLocalStorage } from '../CommonComponentCode/LocalStorageUtils';
-import { NewLocalStorage } from '../CommonComponentCode/Types';
+import { PassedDownData } from '../CommonComponentCode/Types';
 import { ChangeAppType } from '../Dock/ChangeApp';
 
-const baseName = '/breaches';
-
-export const BreachesApp: FC<{
+type Props = {
   changeApp: ChangeAppType;
-  localStorage: NewLocalStorage;
-}> = ({ changeApp, localStorage }) => {
+  localStorage: PassedDownData;
+};
+export const BreachesApp = ({ changeApp, localStorage }: Props) => {
   const [state, setState] = useState(new Date());
   const history = useHistory();
   const {
@@ -35,20 +34,22 @@ export const BreachesApp: FC<{
   return (
     <div>
       <h1>{basePage + ' - ' + subPage}</h1>
-      <Route path={`${path}/reportsPage`}>
-        <ReportsApp changeApp={changeApp} localStorage={localStorage} />
-      </Route>
-      <Route path={`${path}/overview`}>
-        <OverviewApp changeApp={changeApp} localStorage={localStorage} />
-      </Route>
+      <Switch>
+        <Route path={`${path}/reportsPage`}>
+          <ReportsApp changeApp={changeApp} passedDownData={localStorage} />
+        </Route>
+        <Route path={`${path}/overview`}>
+          <OverviewApp changeApp={changeApp} localStorage={localStorage} />
+        </Route>
+      </Switch>
       <div>
         <button onClick={() => changeApp('/portfolios/123', 'ReviewOnly')}>
-          Review Only
+          Portfolios Review Only
         </button>
       </div>
       <div>
         <button onClick={() => changeApp('/portfolios/123', 'buySellMode')}>
-          Buy Sell
+          Portfolios Edit
         </button>
       </div>
     </div>

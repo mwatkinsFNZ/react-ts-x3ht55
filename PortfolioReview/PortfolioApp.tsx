@@ -1,42 +1,49 @@
 import * as React from 'react';
-import { FC, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import {
-  removeLocalStorage,
-  updateLocalStorage,
-} from '../CommonComponentCode/LocalStorageUtils';
-import { NewLocalStorage } from '../CommonComponentCode/Types';
+import { FC } from 'react';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { PassedDownData } from '../CommonComponentCode/Types';
 import { ChangeAppType } from '../Dock/ChangeApp';
+import { OrdersApp } from '../PortfolioReview/Orders/OrdersApp';
+import { PortfolioHomeApp } from '../PortfolioReview/PortfolioHomeApp';
 import { PrintLocalStorage } from '../PrintLocalStorage';
 
 export const PortfoliosApp: FC<{
   changeApp: ChangeAppType;
-  localStorage: NewLocalStorage;
+  localStorage: PassedDownData;
 }> = ({ changeApp, localStorage }) => {
   const history = useHistory();
   const {
     location: { pathname },
   } = history;
-  const [, basePage] = pathname.split('/');
-  const [state, setState] = useState(new Date());
-
-  useEffect(() => {
-    if (localStorage.path === 'buySellMode') {
-      updateLocalStorage({ key: 'portfolio-review-buy-sell', value: 'true' });
-    } else if (localStorage.path === 'ReviewOnly') {
-      removeLocalStorage('portfolio-review-buy-sell');
-    }
-
-    setState(new Date()); // used to trigger a re-render for the local-storage updates to take effect
-  }, [history]);
+  const [, basePage, portfolioId, subPage] = pathname.split('/');
+  const { path } = useRouteMatch();
 
   return (
     <div>
-      <h1>{basePage}</h1>
+      <h1>{subPage ? basePage + ' - ' + subPage : basePage}</h1>
       <PrintLocalStorage />
+      <Switch>
+        <Route path={`${path}/:portfolioId/orders`}>
+          <OrdersApp changeApp={changeApp} localStorage={localStorage} />
+        </Route>
+        <Route exact path={`${path}`}>
+          {/* this route is not needed in the actual app due to the default portfolio id */}
+          <PortfolioHomeApp changeApp={changeApp} localStorage={localStorage} />
+        </Route>
+        <Route exact path={`${path}/:portfolioId`}>
+          <PortfolioHomeApp changeApp={changeApp} localStorage={localStorage} />
+        </Route>
+      </Switch>
       <div>
         <button onClick={() => changeApp('/breaches/overview', 'overview')}>
           Breach Overview
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={() => changeApp('/breaches/reportsPage', 'reportsPage')}
+        >
+          Breach Reports
         </button>
       </div>
       <div>

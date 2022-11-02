@@ -1,14 +1,11 @@
 import { useHistory } from 'react-router-dom';
-import {
-  LocalStorageKeysRequiringInput,
-  Path,
-} from '../CommonComponentCode/Types';
+import { ChangeAppCrossAppType, Path } from '../CommonComponentCode/Types';
 import { AppStateContext, useAppStateContext } from '../Dock/DockApp';
 
 export type ChangeAppType = (
   to: string,
   path: Path,
-  params?: Map<LocalStorageKeysRequiringInput, string>
+  params?: Map<ChangeAppCrossAppType['key'], string>
 ) => void;
 
 export function useChangeApp(): {
@@ -20,7 +17,7 @@ export function useChangeApp(): {
   const change = (
     to: string,
     path: Path,
-    params: Map<LocalStorageKeysRequiringInput, string>
+    params: Map<ChangeAppCrossAppType['key'], string>
   ) => {
     if (false) {
       // todo check if the first url part is in the "apps.shortname"
@@ -28,7 +25,7 @@ export function useChangeApp(): {
 
     setState((s) => ({
       ...s,
-      localStorage: {
+      changeAppData: {
         path,
         params: params ?? new Map(),
       },

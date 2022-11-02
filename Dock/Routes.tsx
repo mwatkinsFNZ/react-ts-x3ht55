@@ -8,13 +8,22 @@ import { PortfoliosApp } from '../PortfolioReview/PortfolioApp';
 export default function Routes() {
   const { change } = useChangeApp();
   const { state, setState } = useAppStateContext(AppStateContext);
-  const defaultLocalStorage = {
+  const defaultChangeAppData = {
     path: undefined,
     params: undefined,
   };
   return (
     <div>
-      <span>Dock Navigation: </span>
+      <p>
+        Child apps will print the current local storage content - Chrome has
+        some default local storage.
+      </p>
+      <p>
+        You can manually clear this by opening the panel's console (bottom of
+        the panel) and typing window.localStorage.clear() and reopening the
+        panel (top right of the panel is "close" button)
+      </p>
+      <h1>Dock Navigation: </h1>
       <div>
         <NavLink to={'/Portfolios'} onClick={() => setState(undefined)}>
           Portfolios
@@ -28,13 +37,13 @@ export default function Routes() {
       <Route path={'/Breaches'}>
         <BreachesApp
           changeApp={change}
-          localStorage={state?.localStorage ?? defaultLocalStorage}
+          localStorage={state?.changeAppData ?? defaultChangeAppData}
         />
       </Route>
       <Route path={'/Portfolios'}>
         <PortfoliosApp
           changeApp={change}
-          localStorage={state?.localStorage ?? defaultLocalStorage}
+          localStorage={state?.changeAppData ?? defaultChangeAppData}
         />
       </Route>
       <Route path={'/'}>

@@ -13,7 +13,7 @@ import Routes from '../Dock/Routes';
 
 export type AppState = {
   /// additional dock state properties
-  localStorage: NewLocalStorage;
+  changeAppData: NewLocalStorage;
 };
 
 export type AppStateContext = {

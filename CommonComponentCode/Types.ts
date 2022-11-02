@@ -1,24 +1,42 @@
-export type LocalStorage = {
-  key: LocalStorageKeys;
-  value: string;
-};
-
-export type LocalStorageKeys =
-  | LocalStorageKeysRequiringInput
-  | BreachesKeys
-  | PortfoliosKeys;
-
-export type BreachesKeys = 'breaches-reports-modal-open' | 'breaches-url';
-export type PortfoliosKeys = 'portfolio-review-buy-sell';
-
-export type LocalStorageKeysRequiringInput = BreachesKeysRequiringValues;
-export type BreachesKeysRequiringValues = 'breaches-reports-breaches-id';
-
-export type NewLocalStorage = {
+export type PassedDownData = {
   path: Path;
-  params: Map<LocalStorageKeysRequiringInput, string>;
+  params: Map<ChangeAppCrossAppType['key'], string>;
 };
 
 export type Path = BreachesPaths | PortfolioReviewPaths;
 export type BreachesPaths = 'overview' | 'reportsPage' | 'breachSummary';
-export type PortfolioReviewPaths = 'ReviewOnly' | 'buySellMode';
+export type PortfolioReviewPaths = 'ReviewOnly' | 'buySellMode' | 'orders';
+
+/**
+ * ChangeApp design:
+ * key: used as the LocalStorage key
+ * value: will be stringified
+ * CrossApp: signifies that the value should be passed in from the source code
+ */
+export type ChangeAppKeys = ChangeAppType['key'];
+export type ChangeAppCrossAppType = Omit<
+  Extract<ChangeAppType, { CrossApp? }>,
+  'CrossApp'
+>;
+export type ChangeAppType =
+  | BreachesReportsBreachId
+  | BreachesReportsModalOpen
+  | BreachesUrl
+  | PortfolioBuySell;
+export type BreachesReportsBreachId = {
+  key: 'breaches-reports-breaches-id';
+  value: number;
+  CrossApp?;
+};
+export type BreachesReportsModalOpen = {
+  key: 'breaches-reports-modal-open';
+  value: boolean;
+};
+export type BreachesUrl = {
+  key: 'breaches-url';
+  value: string;
+};
+export type PortfolioBuySell = {
+  key: 'portfolio-review-buy-sell';
+  value: boolean;
+};
