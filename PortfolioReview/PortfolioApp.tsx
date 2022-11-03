@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { FC } from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
-import { PassedDownData } from '../CommonComponentCode/Types';
-import { ChangeAppType } from '../Dock/ChangeApp';
+import { ChangeAppType, PassedDownData } from '../CommonComponentCode/Types';
 import { OrdersApp } from '../PortfolioReview/Orders/OrdersApp';
 import { PortfolioHomeApp } from '../PortfolioReview/PortfolioHomeApp';
 import { PrintLocalStorage } from '../PrintLocalStorage';
@@ -21,7 +20,6 @@ export const PortfoliosApp: FC<{
   return (
     <div>
       <h1>{subPage ? basePage + ' - ' + subPage : basePage}</h1>
-      <PrintLocalStorage />
       <Switch>
         <Route path={`${path}/:portfolioId/orders`}>
           <OrdersApp changeApp={changeApp} localStorage={localStorage} />
@@ -52,7 +50,7 @@ export const PortfoliosApp: FC<{
             changeApp(
               '/breaches/reportsPage',
               'breachSummary',
-              new Map([['breaches-reports-breaches-id', '123']])
+              new Map([['breaches-reports-breaches-id', 123]])
             )
           }
         >

@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { FC } from 'react';
-import { NewLocalStorage } from '../../CommonComponentCode/Types';
-import { ChangeAppType } from '../../Dock/ChangeApp';
+import { ChangeAppType, PassedDownData } from '../../CommonComponentCode/Types';
+import { PrintLocalStorage } from '../../PrintLocalStorage';
 
 export const OrdersApp: FC<{
   changeApp: ChangeAppType;
-  localStorage: NewLocalStorage;
+  localStorage: PassedDownData;
 }> = ({ changeApp, localStorage }) => {
   return (
     <div>
+      <PrintLocalStorage />
       <div>
         <button onClick={() => changeApp('/portfolios/123', 'ReviewOnly')}>
           Portfolios Review Only

@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { OverviewApp } from '../Breaches/Overview/OverviewApp';
 import { ReportsApp } from '../Breaches/ReportsPage/ReportsApp';
-import { updateLocalStorage } from '../CommonComponentCode/LocalStorageUtils';
-import { PassedDownData } from '../CommonComponentCode/Types';
-import { ChangeAppType } from '../Dock/ChangeApp';
+import { ChangeAppType, PassedDownData } from '../CommonComponentCode/Types';
 
 type Props = {
   changeApp: ChangeAppType;
@@ -26,7 +24,7 @@ export const BreachesApp = ({ changeApp, localStorage }: Props) => {
       const url = window.localStorage['breaches-url'];
       history.push(url ?? pathname + '/overview');
     } else {
-      updateLocalStorage({ key: 'breaches-url', value: pathname });
+      window.localStorage.setItem('breaches-url', pathname);
     }
     setState(new Date()); // used to trigger a re-render for the local-storage updates to take effect
   }, [pathname]);

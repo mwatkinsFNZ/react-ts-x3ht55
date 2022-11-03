@@ -1,11 +1,7 @@
 import * as React from 'react';
 import { FC, useEffect, useState } from 'react';
-import {
-  removeLocalStorage,
-  updateLocalStorage,
-} from '../CommonComponentCode/LocalStorageUtils';
-import { PassedDownData } from '../CommonComponentCode/Types';
-import { ChangeAppType } from '../Dock/ChangeApp';
+import { ChangeAppType, PassedDownData } from '../CommonComponentCode/Types';
+import { PrintLocalStorage } from '../PrintLocalStorage';
 
 export const PortfolioHomeApp: FC<{
   changeApp: ChangeAppType;
@@ -15,9 +11,9 @@ export const PortfolioHomeApp: FC<{
 
   useEffect(() => {
     if (localStorage.path === 'buySellMode') {
-      updateLocalStorage({ key: 'portfolio-review-buy-sell', value: true });
+      window.localStorage.setItem('portfolio-review-buy-sell', 'true');
     } else if (localStorage.path === 'ReviewOnly') {
-      removeLocalStorage('portfolio-review-buy-sell');
+      window.localStorage.removeItem('portfolio-review-buy-sell');
     }
 
     setState(new Date()); // used to trigger a re-render for the local-storage updates to take effect
@@ -25,6 +21,7 @@ export const PortfolioHomeApp: FC<{
 
   return (
     <div>
+      <PrintLocalStorage />
       <button onClick={() => changeApp('/portfolios/123/orders', 'orders')}>
         Orders
       </button>

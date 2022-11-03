@@ -8,12 +8,12 @@ import {
   useState,
 } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { NewLocalStorage } from '../CommonComponentCode/Types';
+import { PassedDownData } from '../CommonComponentCode/Types';
 import Routes from '../Dock/Routes';
 
 export type AppState = {
   /// additional dock state properties
-  changeAppData: NewLocalStorage;
+  changeAppData: PassedDownData;
 };
 
 export type AppStateContext = {

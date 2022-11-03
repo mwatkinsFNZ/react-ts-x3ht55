@@ -1,6 +1,12 @@
+export type ChangeAppType = (
+  to: string,
+  path: Path,
+  params?: Map<CrossAppKeys, CrossAppValue<CrossAppKeys>>
+) => void;
+
 export type PassedDownData = {
   path: Path;
-  params: Map<ChangeAppCrossAppType['key'], string>;
+  params: Map<CrossAppKeys, CrossAppValue<CrossAppKeys>>;
 };
 
 export type Path = BreachesPaths | PortfolioReviewPaths;
@@ -8,35 +14,17 @@ export type BreachesPaths = 'overview' | 'reportsPage' | 'breachSummary';
 export type PortfolioReviewPaths = 'ReviewOnly' | 'buySellMode' | 'orders';
 
 /**
- * ChangeApp design:
- * key: used as the LocalStorage key
- * value: will be stringified
- * CrossApp: signifies that the value should be passed in from the source code
+ * Variables to be shared between apps when navigating
+ * key format: app_childApp_childApp_..._name
+ * value: type of data being shared
  */
-export type ChangeAppKeys = ChangeAppType['key'];
-export type ChangeAppCrossAppType = Omit<
-  Extract<ChangeAppType, { CrossApp? }>,
-  'CrossApp'
->;
-export type ChangeAppType =
-  | BreachesReportsBreachId
-  | BreachesReportsModalOpen
-  | BreachesUrl
-  | PortfolioBuySell;
+export type CrossAppKeys = CrossAppType['key'];
+export type CrossAppValue<T extends CrossAppType['key']> = Extract<
+  CrossAppType,
+  { key: T }
+>['value'];
+export type CrossAppType = BreachesReportsBreachId;
 export type BreachesReportsBreachId = {
   key: 'breaches-reports-breaches-id';
   value: number;
-  CrossApp?;
-};
-export type BreachesReportsModalOpen = {
-  key: 'breaches-reports-modal-open';
-  value: boolean;
-};
-export type BreachesUrl = {
-  key: 'breaches-url';
-  value: string;
-};
-export type PortfolioBuySell = {
-  key: 'portfolio-review-buy-sell';
-  value: boolean;
 };
