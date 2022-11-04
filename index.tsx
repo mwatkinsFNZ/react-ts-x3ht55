@@ -7,10 +7,10 @@ import DockApp from './Dock/DockApp';
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
-// root.render(
-//   <StrictMode>
-//     <DockApp />
-//   </StrictMode>
-// );
+root.render(
+  <StrictMode>
+    <DockApp />
+  </StrictMode>
+);
 
-root.render(<DockApp />);
+// root.render(<DockApp />);

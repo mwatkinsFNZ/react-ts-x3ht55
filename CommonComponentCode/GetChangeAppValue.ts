@@ -6,8 +6,3 @@ export function getCrossAppValue<T extends CrossAppKeys>(
 ): CrossAppValue<T> {
   return map.get(param) as CrossAppValue<T>;
 }
-
-// todo delete below here
-const map: Map<CrossAppKeys, CrossAppValue<CrossAppKeys>> = new Map();
-const mappedValue = map.get('breaches-reports-breaches-id');
-const getValueTest = getCrossAppValue(map, 'breaches-reports-breaches-id');

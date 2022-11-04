@@ -2,7 +2,6 @@ import * as React from 'react';
 import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getCrossAppValue } from '../../CommonComponentCode/GetChangeAppValue';
-import { updateLocalStorage } from '../../CommonComponentCode/LocalStorageUtils';
 import { ChangeAppType, PassedDownData } from '../../CommonComponentCode/Types';
 import { PrintLocalStorage } from '../../PrintLocalStorage';
 
@@ -16,13 +15,13 @@ export const ReportsApp: FC<{
   useEffect(() => {
     if (passedDownData.path === 'breachSummary') {
       window.localStorage.setItem('breaches-reports-modal-open', 'true');
-      updateLocalStorage({
-        key: 'breaches-reports-breaches-id',
-        value: getCrossAppValue(
+      window.localStorage.setItem(
+        'breaches-reports-breaches-id',
+        getCrossAppValue(
           passedDownData.params,
           'breaches-reports-breaches-id'
-        ),
-      });
+        ).toString()
+      );
     } else if (passedDownData.path === 'reportsPage') {
       window.localStorage.removeItem('breaches-reports-modal-open');
       window.localStorage.removeItem('breaches-reports-breaches-id');
