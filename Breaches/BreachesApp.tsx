@@ -7,9 +7,9 @@ import { ChangeAppType, PassedDownData } from '../CommonComponentCode/Types';
 
 type Props = {
   changeApp: ChangeAppType;
-  localStorage: PassedDownData;
+  changeAppData: PassedDownData;
 };
-export const BreachesApp = ({ changeApp, localStorage }: Props) => {
+export const BreachesApp = ({ changeApp, changeAppData }: Props) => {
   const [state, setState] = useState(new Date());
   const history = useHistory();
   const {
@@ -34,10 +34,10 @@ export const BreachesApp = ({ changeApp, localStorage }: Props) => {
       <h1>{basePage + ' - ' + subPage}</h1>
       <Switch>
         <Route path={`${path}/reportsPage`}>
-          <ReportsApp changeApp={changeApp} passedDownData={localStorage} />
+          <ReportsApp changeApp={changeApp} passedDownData={changeAppData} />
         </Route>
         <Route path={`${path}/overview`}>
-          <OverviewApp changeApp={changeApp} localStorage={localStorage} />
+          <OverviewApp changeApp={changeApp} localStorage={changeAppData} />
         </Route>
       </Switch>
       <div>

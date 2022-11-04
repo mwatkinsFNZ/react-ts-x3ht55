@@ -51,13 +51,13 @@ export default function Routes() {
       <Route path={'/Breaches'}>
         <BreachesApp
           changeApp={change}
-          localStorage={state?.changeAppData ?? defaultChangeAppData}
+          changeAppData={state?.changeAppData ?? defaultChangeAppData}
         />
       </Route>
       <Route path={'/Portfolios'}>
         <PortfoliosApp
           changeApp={change}
-          localStorage={state?.changeAppData ?? defaultChangeAppData}
+          changeAppData={state?.changeAppData ?? defaultChangeAppData}
         />
       </Route>
       <Route path={'/'}>

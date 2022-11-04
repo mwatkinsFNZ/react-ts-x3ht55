@@ -5,17 +5,17 @@ import { PrintLocalStorage } from '../PrintLocalStorage';
 
 export const PortfolioHomeApp: FC<{
   changeApp: ChangeAppType;
-  localStorage: PassedDownData;
-}> = ({ changeApp, localStorage }) => {
+  changeAppData: PassedDownData;
+}> = ({ changeApp, changeAppData }) => {
   const [state, setState] = useState(new Date());
 
   useEffect(() => {
     if (
-      localStorage.path === 'buySellMode'
+      changeAppData.path === 'buySellMode'
       /* CAN ADD ADDITIONAL CHECKS HERE - E.G. PERMISSION CHECK */
     ) {
       window.localStorage.setItem('portfolio-review-buy-sell', 'true');
-    } else if (localStorage.path === 'ReviewOnly') {
+    } else if (changeAppData.path === 'ReviewOnly') {
       window.localStorage.removeItem('portfolio-review-buy-sell');
     }
 

@@ -4,12 +4,11 @@ import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { ChangeAppType, PassedDownData } from '../CommonComponentCode/Types';
 import { OrdersApp } from '../PortfolioReview/Orders/OrdersApp';
 import { PortfolioHomeApp } from '../PortfolioReview/PortfolioHomeApp';
-import { PrintLocalStorage } from '../PrintLocalStorage';
 
 export const PortfoliosApp: FC<{
   changeApp: ChangeAppType;
-  localStorage: PassedDownData;
-}> = ({ changeApp, localStorage }) => {
+  changeAppData: PassedDownData;
+}> = ({ changeApp, changeAppData }) => {
   const history = useHistory();
   const {
     location: { pathname },
@@ -22,14 +21,20 @@ export const PortfoliosApp: FC<{
       <h1>{subPage ? basePage + ' - ' + subPage : basePage}</h1>
       <Switch>
         <Route path={`${path}/:portfolioId/orders`}>
-          <OrdersApp changeApp={changeApp} localStorage={localStorage} />
+          <OrdersApp changeApp={changeApp} localStorage={changeAppData} />
         </Route>
         <Route exact path={`${path}`}>
           {/* this route is not needed in the actual app due to the default portfolio id */}
-          <PortfolioHomeApp changeApp={changeApp} localStorage={localStorage} />
+          <PortfolioHomeApp
+            changeApp={changeApp}
+            changeAppData={changeAppData}
+          />
         </Route>
         <Route exact path={`${path}/:portfolioId`}>
-          <PortfolioHomeApp changeApp={changeApp} localStorage={localStorage} />
+          <PortfolioHomeApp
+            changeApp={changeApp}
+            changeAppData={changeAppData}
+          />
         </Route>
       </Switch>
       <div>

@@ -5,8 +5,8 @@ import { PrintLocalStorage } from '../../PrintLocalStorage';
 
 export const OrdersApp: FC<{
   changeApp: ChangeAppType;
-  localStorage: PassedDownData;
-}> = ({ changeApp, localStorage }) => {
+  changeAppData: PassedDownData;
+}> = ({ changeApp, changeAppData }) => {
   return (
     <div>
       <PrintLocalStorage />
