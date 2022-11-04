@@ -10,7 +10,10 @@ export const PortfolioHomeApp: FC<{
   const [state, setState] = useState(new Date());
 
   useEffect(() => {
-    if (localStorage.path === 'buySellMode') {
+    if (
+      localStorage.path === 'buySellMode'
+      /* CAN ADD ADDITIONAL CHECKS HERE - E.G. PERMISSION CHECK */
+    ) {
       window.localStorage.setItem('portfolio-review-buy-sell', 'true');
     } else if (localStorage.path === 'ReviewOnly') {
       window.localStorage.removeItem('portfolio-review-buy-sell');
