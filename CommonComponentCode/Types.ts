@@ -23,8 +23,12 @@ export type CrossAppValue<T extends CrossAppType['key']> = Extract<
   CrossAppType,
   { key: T }
 >['value'];
-export type CrossAppType = BreachesReportsBreachId;
+export type CrossAppType = BreachesReportsBreachId | Test;
 export type BreachesReportsBreachId = {
   key: 'breaches-reports-breaches-id';
   value: number;
+};
+export type Test = {
+  key: 'test';
+  value: boolean;
 };

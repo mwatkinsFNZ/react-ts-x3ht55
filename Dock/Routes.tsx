@@ -6,7 +6,10 @@ import { AppStateContext, useAppStateContext } from '../Dock/DockApp';
 import { PortfoliosApp } from '../PortfolioReview/PortfolioApp';
 
 export default function Routes() {
-  const { change } = useChangeApp();
+  const { change } = useChangeApp([
+    { shortname: 'breaches' },
+    { shortname: 'portfolios' },
+  ]);
   const { state, setState } = useAppStateContext(AppStateContext);
   const defaultChangeAppData = {
     path: undefined,

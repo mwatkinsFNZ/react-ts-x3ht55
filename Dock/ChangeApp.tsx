@@ -6,7 +6,7 @@ import {
 } from '../CommonComponentCode/Types';
 import { AppStateContext, useAppStateContext } from '../Dock/DockApp';
 
-export function useChangeApp(): {
+export function useChangeApp(apps: { shortname: string }[]): {
   change: ChangeAppType;
 } {
   const history = useHistory();
@@ -17,8 +17,10 @@ export function useChangeApp(): {
     path: Path,
     params: Map<CrossAppKeys, unknown>
   ) => {
-    if (false) {
-      // todo check if the first url part is in the "apps.shortname"
+    const [, appUrl] = to.split('/');
+    if (!apps.some((x) => x.shortname === appUrl)) {
+      throw Error(`Could not navigate to ${to}`);
+      return;
     }
 
     setState((s) => ({

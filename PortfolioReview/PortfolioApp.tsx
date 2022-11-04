@@ -57,6 +57,11 @@ export const PortfoliosApp: FC<{
           Breach Summary
         </button>
       </div>
+      <div>
+        <button onClick={() => changeApp('/non-existent-app', 'overview')}>
+          Non Existent App
+        </button>
+      </div>
     </div>
   );
 };

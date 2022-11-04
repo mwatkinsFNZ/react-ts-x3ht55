@@ -20,7 +20,7 @@ export const ReportsApp: FC<{
         getCrossAppValue(
           passedDownData.params,
           'breaches-reports-breaches-id'
-        ).toString()
+        )?.toString()
       );
     } else if (passedDownData.path === 'reportsPage') {
       window.localStorage.removeItem('breaches-reports-modal-open');
