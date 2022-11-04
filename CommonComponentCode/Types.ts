@@ -1,14 +1,10 @@
-export type ChangeAppType = (
-  to: string,
-  path: Path,
-  params?: Map<CrossAppKeys, CrossAppValue<CrossAppKeys>>
-) => void;
-
+export type ChangeAppType = (to: string, path: Path, params?: Params) => void;
 export type PassedDownData = {
   path: Path;
-  params: Map<CrossAppKeys, CrossAppValue<CrossAppKeys>>;
+  params: Params;
 };
 
+export type Params = Map<CrossAppKeys, CrossAppValue<CrossAppKeys>>;
 export type Path = BreachesPaths | PortfolioReviewPaths;
 export type BreachesPaths = 'overview' | 'reportsPage' | 'breachSummary';
 export type PortfolioReviewPaths = 'ReviewOnly' | 'buySellMode' | 'orders';
