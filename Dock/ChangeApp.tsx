@@ -1,11 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import {
-  ChangeAppType,
-  CrossAppKeys,
-  CrossAppValue,
-  Params,
-  Path,
-} from '../CommonComponentCode/Types';
+import { ChangeAppType, Params, Path } from '../CommonComponentCode/Types';
 import { AppStateContext, useAppStateContext } from '../Dock/DockApp';
 
 export function useChangeApp(apps: { shortname: string }[]): {
