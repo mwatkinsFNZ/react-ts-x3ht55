@@ -21,7 +21,7 @@ export const PortfoliosApp: FC<{
       <h1>{subPage ? basePage + ' - ' + subPage : basePage}</h1>
       <Switch>
         <Route path={`${path}/:portfolioId/orders`}>
-          <OrdersApp changeApp={changeApp} localStorage={changeAppData} />
+          <OrdersApp changeApp={changeApp} changeAppData={changeAppData} />
         </Route>
         <Route exact path={`${path}`}>
           {/* this route is not needed in the actual app due to the default portfolio id */}
@@ -52,11 +52,9 @@ export const PortfoliosApp: FC<{
       <div>
         <button
           onClick={() =>
-            changeApp(
-              '/breaches/reportsPage',
-              'breachSummary',
-              new Map([['breaches-reports-breaches-id', 123]])
-            )
+            changeApp('/breaches/reportsPage', 'breachSummary', [
+              ['breaches-reports-breaches-id', 123],
+            ])
           }
         >
           Breach Summary
