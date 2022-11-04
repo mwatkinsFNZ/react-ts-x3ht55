@@ -23,8 +23,8 @@ export default function Routes() {
       </p>
       <p>
         You can manually clear this by opening the panel's console (bottom of
-        the panel) and typing window.localStorage.clear() and reopening the
-        panel (top right of the panel is "close" button)
+        the panel) and typing window.localStorage.clear() and hit the refresh
+        button on the right-panel
       </p>
       <h1>Dock Navigation: </h1>
       <div>
